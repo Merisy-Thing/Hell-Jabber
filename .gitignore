@@ -1,0 +1,11 @@
+tags
+hell_jabber/translations/*.qm
+hell_jabber/QXmppClientLog.log
+hell_jabber/ui_*.h
+hell_jabber/release/*
+hell_jabber/debug/*
+*Makefile*
+*.user
+.directory
+*.bat
+hell_jabber-build-desktop

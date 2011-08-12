@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>302</width>
+    <height>551</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Hell Jabber</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QPushButton" name="pb_avatar_btn">
+        <property name="minimumSize">
+         <size>
+          <width>48</width>
+          <height>48</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>48</width>
+          <height>48</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <widget class="QLabel" name="lb_client_name">
+            <property name="text">
+             <string>Name</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lb_client_status">
+            <property name="layoutDirection">
+             <enum>Qt::LeftToRight</enum>
+            </property>
+            <property name="text">
+             <string>Status</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="le_client_status_message">
+          <property name="text">
+           <string>Status Message</string>
+          </property>
+          <property name="maxLength">
+           <number>512</number>
+          </property>
+          <property name="cursorPosition">
+           <number>14</number>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_4">
+      <item>
+       <widget class="QLineEdit" name="le_contact_find"/>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pb_add_contacts">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>36</width>
+          <height>24</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>36</width>
+          <height>24</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Add</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <widget class="QProgressBar" name="pgb_receive_file">
+        <property name="value">
+         <number>0</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pb_abort_receive_file">
+        <property name="text">
+         <string>Abort</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="flm_listView" name="lv_friend_list">
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="selectionRectVisible">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>302</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu_File">
+    <property name="title">
+     <string>&amp;Status</string>
+    </property>
+    <addaction name="action_Available"/>
+    <addaction name="action_Busy"/>
+    <addaction name="action_Away"/>
+    <addaction name="action_Invisible"/>
+    <addaction name="actionSing_Out"/>
+    <addaction name="actionE_xit"/>
+   </widget>
+   <widget class="QMenu" name="menu_About">
+    <property name="title">
+     <string>&amp;Help</string>
+    </property>
+    <addaction name="actionAbout_Hell"/>
+    <addaction name="actionAbout_Qt"/>
+   </widget>
+   <addaction name="menu_File"/>
+   <addaction name="menu_About"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionAbout_Hell">
+   <property name="text">
+    <string>About Hell</string>
+   </property>
+  </action>
+  <action name="actionAbout_Qt">
+   <property name="text">
+    <string>About Qt</string>
+   </property>
+  </action>
+  <action name="action_Available">
+   <property name="text">
+    <string>&amp;Available</string>
+   </property>
+  </action>
+  <action name="action_Busy">
+   <property name="text">
+    <string>&amp;Busy</string>
+   </property>
+  </action>
+  <action name="action_Away">
+   <property name="text">
+    <string>&amp;Away</string>
+   </property>
+  </action>
+  <action name="action_Invisible">
+   <property name="text">
+    <string>&amp;Invisible</string>
+   </property>
+  </action>
+  <action name="actionSing_Out">
+   <property name="text">
+    <string>Sing &amp;Out</string>
+   </property>
+  </action>
+  <action name="actionE_xit">
+   <property name="text">
+    <string>E&amp;xit</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>flm_listView</class>
+   <extends>QListView</extends>
+   <header>flm_listview.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
