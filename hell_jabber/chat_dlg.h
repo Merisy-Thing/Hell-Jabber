@@ -9,6 +9,9 @@
 #include "QXmppUtils.h"
 #include "select_emoticons.h"
 
+#define SYS_SEND_EMOTICON_MSG_FLAG      "/SendImage:)"
+#define EMOTICONS_IMAGES_DIR_NAME   "Emoticons_Images"
+
 namespace Ui {
     class chat_dlg;
 }
@@ -60,11 +63,16 @@ private slots:
 
     void emoticons_lb_mouse_press_event(QString gif_name);
 
+    void on_pb_cancle_transfer_clicked();
+
 private:
     Ui::chat_dlg *ui;
 
     bool m_ctrl_key_down;
     void dlg_send_file(QString file_name);
+    void creat_animation_movie(QString html);
+    QStringList read_image_name_from_html(QString html);
+    void send_emoticon_file(QString html_msg);
 };
 
 #endif // CHAT_DLG_H

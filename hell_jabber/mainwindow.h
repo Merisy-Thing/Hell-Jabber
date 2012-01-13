@@ -61,6 +61,7 @@ private:
     QFile m_receive_file;
     QMap<QString, QString> m_jid_presence;
     QMap<QString, chat_dlg*> m_barejid_chatDlg;
+    bool m_sys_send_image_file;
 
 private slots:
     void on_pb_avatar_btn_clicked();

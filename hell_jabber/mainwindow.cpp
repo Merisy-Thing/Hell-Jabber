@@ -94,6 +94,8 @@ MainWindow::MainWindow(QWidget *parent,
     m_client_ready = false;
     QString barejid = name + "@" + host;
     m_qxmpp_client->connectToServer(barejid, pwd);
+
+    m_sys_send_image_file = false;
 }
 
 MainWindow::~MainWindow()
@@ -128,6 +130,28 @@ void MainWindow::transfer_file_Received (QXmppTransferJob *offer_job)
         offer_job->abort();
     }
     m_file_received_on_the_way = true;
+
+    //qDebug("offer_job->fileName() = %s",offer_job->fileName().toAscii().data());
+    if(m_sys_send_image_file) {
+        m_receive_file.setFileName(QString(EMOTICONS_IMAGES_DIR_NAME)
+                                   + QString("/") + offer_job->fileName());
+        if(m_receive_file.exists() && m_receive_file.size() > 0) {
+            offer_job->abort();
+            m_file_received_on_the_way = false;
+            //qDebug("m_sys_send_image_file: m_receive_file.exists()");
+            m_sys_send_image_file = false;
+            return;
+        }
+        if (!m_receive_file.open(QIODevice::WriteOnly)) {
+            m_file_received_on_the_way = false;
+            //qDebug("m_sys_send_image_file: open fail");
+            m_sys_send_image_file = false;
+            return;
+        }
+        offer_job->accept(&m_receive_file);
+        connect(offer_job, SIGNAL(finished()), this, SLOT(transfer_file_slotFinished()));
+        return;
+    }
 
     QString from_name = m_qxmpp_client->rosterManager().getRosterEntry(jidToBareJid(offer_job->jid())).name();;
     QString message = tr("<B>%1</B>  send a file to you, File name: <B>%2</B>, Accept or NOT ?!");
@@ -195,9 +219,14 @@ void MainWindow::transfer_file_Received (QXmppTransferJob *offer_job)
 void MainWindow::transfer_file_slotFinished()
 {
     m_receive_file.close();
-    m_file_received_on_the_way = false;
-    ui->pgb_receive_file->setVisible(false);
-    ui->pb_abort_receive_file->setVisible(false);
+    //qDebug("transfer_file_slotFinished");
+    if(!m_sys_send_image_file) {
+        m_file_received_on_the_way = false;
+        ui->pgb_receive_file->setVisible(false);
+        ui->pb_abort_receive_file->setVisible(false);
+    } else {
+        m_sys_send_image_file = false;
+    }
 }
 void MainWindow::transfer_file_slotProgress(qint64 done,qint64 total)
 {
@@ -256,6 +285,11 @@ void MainWindow::messageReceived(const QXmppMessage& msg)
 {
     QString from = jidToBareJid(msg.from());
 
+    if(msg.body().contains(QString(SYS_SEND_EMOTICON_MSG_FLAG))) {
+        //qDebug("messageReceived : SYS_SEND_EMOTICON_MSG_FLAG");
+        m_sys_send_image_file = true;
+        return;
+    }
     if(m_barejid_chatDlg.contains(from)) {
         m_barejid_chatDlg[from]->messageReceived(msg);
     } else {

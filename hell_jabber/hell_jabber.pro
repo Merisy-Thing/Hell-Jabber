@@ -35,7 +35,8 @@ SOURCES += main.cpp\
     chat_input_edit.cpp \
     select_emoticons.cpp \
     emoticon_preview_label.cpp \
-    emoticon_preview_widget.cpp
+    emoticon_preview_widget.cpp \
+    chat_log_edit.cpp
 
 HEADERS  += mainwindow.h \
     login.h \
@@ -47,7 +48,8 @@ HEADERS  += mainwindow.h \
     chat_input_edit.h \
     select_emoticons.h \
     emoticon_preview_label.h \
-    emoticon_preview_widget.h
+    emoticon_preview_widget.h \
+    chat_log_edit.h
 
 FORMS    += mainwindow.ui \
     login.ui \

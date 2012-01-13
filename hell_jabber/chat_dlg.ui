@@ -126,7 +126,7 @@
       </layout>
      </item>
      <item>
-      <widget class="QTextEdit" name="te_chat_content">
+      <widget class="chat_log_edit" name="te_chat_content">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
          <horstretch>0</horstretch>
@@ -229,7 +229,7 @@
       </layout>
      </item>
      <item>
-      <widget class="chat_input_edit" name="te_typing_msg">
+      <widget class="chat_input_edit" name="te_msg_input">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
          <horstretch>0</horstretch>
@@ -320,6 +320,11 @@
    <class>chat_input_edit</class>
    <extends>QTextEdit</extends>
    <header>chat_input_edit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>chat_log_edit</class>
+   <extends>QTextEdit</extends>
+   <header>chat_log_edit.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
