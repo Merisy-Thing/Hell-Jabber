@@ -6,7 +6,7 @@ main_frame::main_frame()
 {
 #if DEBUG_MODE
 
-    p_main_win = new MainWindow(NULL, "debug", "debug", "192.168.2.168");
+    p_main_win = new MainWindow(NULL, "hell-jabber", "helljabber", "jabber.org");
     p_main_win->show();
 #else
     p_login = new login;
