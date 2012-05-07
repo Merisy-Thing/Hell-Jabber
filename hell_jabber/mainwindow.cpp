@@ -58,8 +58,8 @@ MainWindow::MainWindow(QWidget *parent,
 
     /*vCardReceived*/
     check = connect(&m_qxmpp_client->vCardManager(),
-                    SIGNAL(vCardReceived(const QXmppVCard&)),
-                    SLOT(vCardReceived(const QXmppVCard&)));
+                    SIGNAL(vCardReceived(const QXmppVCardIq&)),
+                    SLOT(vCardReceived(const QXmppVCardIq&)));
     Q_ASSERT(check);
 
     /*clientVCardReceived*/
@@ -153,10 +153,10 @@ void MainWindow::transfer_file_Received (QXmppTransferJob *offer_job)
         return;
     }
 
-    QString from_name = m_qxmpp_client->rosterManager().getRosterEntry(jidToBareJid(offer_job->jid())).name();;
+    QString from_name = m_qxmpp_client->rosterManager().getRosterEntry(QXmppUtils::jidToBareJid(offer_job->jid())).name();;
     QString message = tr("<B>%1</B>  send a file to you, File name: <B>%2</B>, Accept or NOT ?!");
     if(from_name.isEmpty()) {
-        from_name = jidToBareJid(offer_job->jid());
+        from_name = QXmppUtils::jidToBareJid(offer_job->jid());
     }
 
     int retButton = QMessageBox::question(
@@ -283,7 +283,7 @@ void MainWindow::clientConnected()
 
 void MainWindow::messageReceived(const QXmppMessage& msg)
 {
-    QString from = jidToBareJid(msg.from());
+    QString from = QXmppUtils::jidToBareJid(msg.from());
 
     if(msg.body().contains(QString(SYS_SEND_EMOTICON_MSG_FLAG))) {
         //qDebug("messageReceived : SYS_SEND_EMOTICON_MSG_FLAG");
@@ -293,7 +293,7 @@ void MainWindow::messageReceived(const QXmppMessage& msg)
     if(m_barejid_chatDlg.contains(from)) {
         m_barejid_chatDlg[from]->messageReceived(msg);
     } else {
-        qDebug("from %s : %s",jidToBareJid(from).toAscii().data(), msg.body().toAscii().data());
+        qDebug("from %s : %s",QXmppUtils::jidToBareJid(from).toAscii().data(), msg.body().toAscii().data());
     }
 }
 
@@ -301,7 +301,7 @@ void MainWindow::presenceReceived(const QXmppPresence& presence)
 {
     QString from, mood, message;
 
-    from = jidToBareJid(presence.from());
+    from = QXmppUtils::jidToBareJid(presence.from());
     switch(presence.type()){
     case QXmppPresence::Subscribe:{
             message = "<B>%1</B> wants to subscribe";
@@ -428,7 +428,7 @@ QImage MainWindow::get_image_from_bytearray(const QByteArray& image)
     return  imageReader.read();
 }
 
-void MainWindow::vCardReceived(const QXmppVCard& vcard)
+void MainWindow::vCardReceived(const QXmppVCardIq& vcard)
 {
     QString from = vcard.from();
     QImage default_avatar("default_avatar.png", "PNG");
@@ -481,7 +481,6 @@ void MainWindow::clientVCardReceived()
     case QXmppPresence::Status::DND:
         status = tr("Do Not Disturb");
         break;
-    case QXmppPresence::Status::Invisible:
     case QXmppPresence::Status::Offline:
         status = tr("Offline");
         break;

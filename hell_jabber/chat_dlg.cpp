@@ -250,7 +250,7 @@ void chat_dlg::send_emoticon_file(QString html_msg)
             QCoreApplication::processEvents();
         }
         //qDebug("m_dlg_transfer_manager->sendFile");
-        m_dlg_transfer_manager->sendFile(m_barejid + "/QXmpp", files.at(i), generateStanzaHash());
+        m_dlg_transfer_manager->sendFile(m_barejid + "/QXmpp", files.at(i), QXmppUtils::generateStanzaHash());
         t.restart();
         while(t.elapsed()<100) {
             QCoreApplication::processEvents();
@@ -323,7 +323,7 @@ void chat_dlg::dlg_send_file(QString file_name)
 {
     m_dlg_transfer_manager->setSupportedMethods(QXmppTransferJob::AnyMethod);
 
-    m_transfer_job = m_dlg_transfer_manager->sendFile(m_barejid + "/QXmpp", file_name,  generateStanzaHash());
+    m_transfer_job = m_dlg_transfer_manager->sendFile(m_barejid + "/QXmpp", file_name,  QXmppUtils::generateStanzaHash());
 
     connect(m_transfer_job, SIGNAL(error(QXmppTransferJob::Error)), this, SLOT(error(QXmppTransferJob::Error)));
     connect(m_transfer_job, SIGNAL(finished()), this, SLOT(fileFinished()));

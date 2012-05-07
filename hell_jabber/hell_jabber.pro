@@ -5,22 +5,25 @@ QT += core gui network xml webkit
 CONFIG += debug_and_release
 #CONFIG += console
 
-INCLUDEPATH += ../lib/qxmpp/src
+INCLUDEPATH += ../lib/qxmpp/src/base \
+			../lib/qxmpp/src/client \
+			../lib/qxmpp/src/server
 
 CONFIG(debug, debug|release) {
     QXMPP_LIB = qxmpp_d
-    QXMPP_DIR = ../lib/qxmpp/lib
+    QXMPP_DIR = ../lib/
     TARGET = hell_jabber_d
 } else {
     QXMPP_LIB = qxmpp
-    QXMPP_DIR = ../lib/qxmpp/lib
+    QXMPP_DIR = ../lib/
     TARGET = hell_jabber
 }
 
 #LIBS += -L$$QXMPP_DIR -l$$QXMPP_LIB
 #LIBS += $${QXMPP_DIR}/lib$${QXMPP_LIB}.a
 #PRE_TARGETDEPS += $${QXMPP_DIR}/lib$${QXMPP_LIB}.a
-LIBS += E:/3.Datum/Qt_GPL_Pro/Hell_jabber/Hell/lib/qxmpp/lib/libqxmpp.a
+#LIBS += E:/3.Datum/Qt_GPL_Pro/Hell_jabber/Hell/lib/qxmpp/lib/libqxmpp.a
+LIBS += ../lib/libqxmpp0.a
 
 #Code
 SOURCES += main.cpp\

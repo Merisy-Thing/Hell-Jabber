@@ -98,8 +98,8 @@ MainWindow::MainWindow(QWidget *parent,
 
     /*vCardReceived*/
     check = connect(&m_qxmpp_client->vCardManager(),
-                    SIGNAL(vCardReceived(const QXmppVCard&)),
-                    SLOT(vCardReceived(const QXmppVCard&)));
+                    SIGNAL(vCardReceived(const QXmppVCardIq&)),
+                    SLOT(vCardReceived(const QXmppVCardIq&)));
     Q_ASSERT(check);
 
     /*clientVCardReceived*/
@@ -174,7 +174,7 @@ QImage MainWindow::get_image_from_bytearray(const QByteArray& image)
 
 }
 
-void MainWindow::vCardReceived(const QXmppVCard& vcard)
+void MainWindow::vCardReceived(const QXmppVCardIq& vcard)
 {
     QString from = vcard.from();
     QImage default_avatar("default_avatar.png", "PNG");

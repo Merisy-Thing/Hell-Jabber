@@ -46,7 +46,7 @@ public:
 public slots:
     void clientConnected();
     void rosterReceived();
-    void vCardReceived(const QXmppVCard&);
+    void vCardReceived(const QXmppVCardIq&);
     void clientVCardReceived();
     void presenceReceived(const QXmppPresence&);
     void messageReceived(const QXmppMessage& msg);
